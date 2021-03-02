@@ -1,0 +1,125 @@
+<div class="container mt-10">
+  <h1 class="mt-10">Panel de usuarios</h1>
+  <hr />
+  <!-- Formulario -->
+
+  <form (ngSubmit)="agregar( f )" #f="ngForm">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label"
+        >Nombre del usuario</label
+      >
+      <input
+        type="text"
+        class="form-control mb-3"
+        required
+        [(ngModel)]="usuario.nombre"
+        autocomplete="off"
+        name="nombre"
+      />
+      <label for="exampleInputEmail1" class="form-label"
+        >Contraseña</label
+      >
+      <input
+        type="text"
+        class="form-control mb-3"
+        required
+        [(ngModel)]="usuario.password"
+        autocomplete="off"
+        name="nombre"
+      />
+
+      <div class="row">
+        <div class="col">
+<label for="exampleInputEmail1" class="form-label"
+        >Numero de control</label
+      >
+      <input
+        type="number"
+        class="form-control mb-3"
+        required
+        [(ngModel)]="usuario.nControl"
+        autocomplete="off"
+        name="nombre"
+      />
+
+        </div>
+        <div class="col">
+          <label for="exampleInputEmail1" class="form-label"
+          >Permisos</label
+        >
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupSelect01">Permisos</label>
+          <select class="form-select" id="inputGroupSelect01" [(ngModel)]="usuario.permisos"
+          name="permisos">
+            <option selected value="1">Usuario</option>
+            <option value="2">Admin</option>
+          </select>
+        </div>
+        </div>
+      </div>
+
+      <!-- <input
+        type="number"
+        class="form-control mb-3"
+        required
+        autocomplete="off"
+        [(ngModel)]="usuario.permisos"
+        name="permisos"
+      /> -->
+
+
+      <!-- Acaban los inputs -->
+      <div id="emailHelp" class="form-text fw-bolder text-center">
+        Todos los campos son obligatorios
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success"><i class="fas fa-plus me-2"></i>Agregar usuario</button>
+  </form>
+
+  <!-- Tabla -->
+  <br />
+  <table class="table table-light">
+    <thead >
+      <tr>
+        <th scope="col">id Usuario</th>
+        <th scope="col">Nombres</th>
+        <th scope="col" class="text-center">Numero de Control</th>
+        <th scope="col" class="text-center">Permisos</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <th scope="row">{{ usuario.idUsuario }}</th>
+        <td>{{ usuario.nombre}}</td>
+        <td class="text-center">{{ usuario.nControl }}</td>
+        <td class="text-center">{{ usuario.permisos }}</td>
+        <td>
+          <button type="button" class="btn btn-primary">
+            <i class="fas fa-edit me-2"></i>Editar
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="borrarUsuario(usuario.idUsuario)"
+          >
+            <i class="fas fa-trash me-2"></i>Borrar
+          </button>
+        </td>
+        <td>
+          <!-- <button
+            type="button"
+            class="btn btn-warning"
+            [routerLink]="['/tareas/', usuario.idUsuario]"
+          >
+            <i class="fas fa-tasks me-2"></i>Ver tareas
+          </button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
