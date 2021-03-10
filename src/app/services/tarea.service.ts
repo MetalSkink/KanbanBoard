@@ -21,4 +21,8 @@ export class TareaService {
   deleteTarea(id:number){
     return this.http.delete(`${this.url}/${id}`);
   }
+
+  agregarTarea(tarea:Tarea){
+    return this.http.post(this.url,tarea);
+  }
 }

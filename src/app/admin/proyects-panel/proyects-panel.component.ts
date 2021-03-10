@@ -14,13 +14,16 @@ export class ProyectsPanelComponent implements OnInit {
   proyectos:Proyecto[];
   proyecto = new Proyecto();
 
-  constructor(private _proyectService: ProyectService) { }
-
-  ngOnInit(): void {
+  constructor(private _proyectService: ProyectService) {
     this._proyectService.getProyectos().subscribe(data =>{
       this.proyectos= data;
       console.log(data);
     });
+  }
+
+  ngOnInit(): void {
+    console.log("soy el init");
+
   }
 
   borrarProyecto(id:number){
