@@ -8,7 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { TareasPanelComponent } from './admin/tareas-panel/tareas-panel.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule} from '@angular/forms';
-import { UsersPanelComponent } from './admin/users-panel/users-panel.component'
+import { UsersPanelComponent } from './admin/users-panel/users-panel.component';
+import { LoginPanelComponent } from './login/login-panel/login-panel.component';
+import { BoardComponent } from './board/board/board.component'
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { UsersPanelComponent } from './admin/users-panel/users-panel.component'
     ProyectsPanelComponent,
     TareasPanelComponent,
     NavbarComponent,
-    UsersPanelComponent
+    UsersPanelComponent,
+    LoginPanelComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
