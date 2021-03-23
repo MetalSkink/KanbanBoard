@@ -1,3 +1,4 @@
+import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { Tarea } from '../../models/Tarea';
@@ -11,6 +12,7 @@ export class BoardComponent implements OnInit {
 
   idUsuario:number;
   tareasDeUsuario:Tarea[];
+  backlog:Tarea[];
 
   constructor(private _usuariosService: UsuarioService) { }
 
@@ -19,6 +21,7 @@ export class BoardComponent implements OnInit {
     this._usuariosService.getUsuario(this.idUsuario).subscribe(data=>{
       console.log(data.tareasDeUsuario);
       this.tareasDeUsuario=data.tareasDeUsuario;
+      this.backlog=data.tareasDeUsuario;
 
     })
   }
@@ -37,5 +40,12 @@ export class BoardComponent implements OnInit {
   pausar(){
     let date: Date = new Date();
     console.log("tarea pausada a las"+ date);
+  }
+
+  drop (event: CdkDragDrop<Tarea[]>): void{
+    console.log("arrastrado test");
+    if ( event.previousContainer === event.container){
+      return
+    }
   }
 }

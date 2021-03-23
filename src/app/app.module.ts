@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule} from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import {DragDropModule} from "@angular/cdk/drag-drop";
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 //Componentes
 import { ProyectsPanelComponent } from './admin/proyects-panel/proyects-panel.component';
@@ -29,6 +29,7 @@ import { UsersPanelComponent } from './admin/users-panel/users-panel.component';
 
   ],
   imports: [
+    DragDropModule,
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
