@@ -1,5 +1,4 @@
 .content-wrapper{
-  max-width: 1400px;
   margin: auto;
 }
 
@@ -9,6 +8,10 @@
 }
 
 .container{
-  width: 400px;
+  width: 500px;
   margin: 0 25px 25px 0;
+}
+
+.card{
+
 }

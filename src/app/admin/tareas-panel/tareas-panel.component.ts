@@ -84,7 +84,6 @@ export class TareasPanelComponent implements OnInit {
       console.log("formulario no valido");
       return;
     }
-    console.log(form);
     console.log(this.tarea);
     this._tareasService.agregarTarea(this.tarea).subscribe(()=>{
       this._proyectosService.getProyecto(this.idNumber).subscribe(data=>{

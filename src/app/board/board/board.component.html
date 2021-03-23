@@ -1,11 +1,31 @@
-<p>board works!</p>
 <div class="content-wrapper">
   <div class="container-wrapper">
     <div class="container">
       <h2>Backlog</h2>
       <div class="card">
         <div class="card-body">
-          This is some text within a card body.
+          <!-- Este es el card de ejemplo -->
+          <div class="card m-3" *ngFor="let tarea of tareasDeUsuario">
+            <div class="card-header">
+              {{tarea.nombreTarea}}
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+                {{tarea.descripcion}}<br>
+                <strong>Hora Inicio: </strong> {{tarea.horaInicio}}<br>
+                <strong>Hora Fin: </strong> {{tarea.horaFin}}<br>
+                <strong>Horas Acumuladas: </strong> {{tarea.horasAcumuladas}}<br>
+              </p>
+              <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              <!-- <button type="button" class="btn btn-success btn-sm">Success</button>
+              <button type="button" class="btn btn-danger btn-sm">Danger</button> -->
+              <div class="d-grid gap-2">
+                <button class="btn btn-success" type="button" (click)=empezar()><i class="fas fa-clock me-2"></i>Empezar</button>
+                <button class="btn btn-danger" type="button" (click)=pausar()><i class="fas fa-user-clock me-2"></i>Pausar</button>
+              </div>
+            </div>
+          </div>
+          <!-- Aqui acaba el card de ejemplo -->
         </div>
       </div>
     </div>
@@ -14,7 +34,7 @@
       <h2>To Do</h2>
       <div class="card">
         <div class="card-body">
-          This is some text within a card body.
+
         </div>
       </div>
     </div>

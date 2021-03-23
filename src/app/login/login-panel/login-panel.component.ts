@@ -15,21 +15,22 @@ export class LoginPanelComponent implements OnInit {
   logeado:boolean= false;
   idUsuario:number;
 
-  constructor(private router:Router,
-              private _usuariosServive:UsuarioService) {
+  constructor(private router:Router) {
     this.logeado=Boolean(localStorage.getItem('sesion'));
     console.log(this.logeado);
     if (this.logeado) {
       console.log('te voy a redirigir al board');
+      this.router.navigateByUrl('/board');
 
     }else{
       console.log('te quedas en el login');
+      this.router.navigateByUrl('/login');
     }
-    this.idUsuario=Number(localStorage.getItem('nControl'));
-    this._usuariosServive.getUsuario(this.idUsuario).subscribe(data=>{
-      console.log(data);
+    // this.idUsuario=Number(localStorage.getItem('nControl'));
+    // this._usuariosServive.getUsuario(this.idUsuario).subscribe(data=>{
+    //   console.log(data);
 
-    })
+    // })
 
   }
 

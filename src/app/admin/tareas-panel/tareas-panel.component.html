@@ -35,10 +35,10 @@
     <select
       class="form-select"
       id="inputGroupSelect01"
-      [(ngModel)]="tarea.usuario"
+      [(ngModel)]="tarea.idUsuarioTarea"
       name="descripcion"
     >
-      <option value="usuario.idUsuario" *ngFor="let usuario of usuarios">
+      <option [value]="usuario.idUsuario" *ngFor="let usuario of usuarios">
         {{ usuario.nombre }}
       </option>
     </select>
@@ -79,7 +79,7 @@
     <tr *ngFor="let tarea of tareasProyecto">
       <th scope="row">{{ tarea.idTarea }}</th>
       <td>{{ tarea.nombreTarea }}</td>
-      <td>{{ tarea.usuario.nombre }}</td>
+      <td>{{ tarea.idUsuarioTarea}}</td>
       <td>{{ tarea.status }}</td>
       <td>{{ tarea.descripcion }}</td>
       <td>
@@ -101,6 +101,6 @@
 </table>
 
 <div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">No hay proyectos todavia</h4>
+  <h4 class="alert-heading">No hay tareas todavia</h4>
   <p>No hay tareas en este proyecto puedes agregar un proyecto desde este panel</p>
-  </div>
+</div>

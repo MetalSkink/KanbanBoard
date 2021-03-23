@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'proyectos', component: ProyectsPanelComponent },
   { path: 'tareas/:id', component: TareasPanelComponent },
   { path: 'usuarios', component: UsersPanelComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'proyectos' }
+  { path: '**', pathMatch: 'full', redirectTo: 'board' }
 ];
 
 @NgModule({

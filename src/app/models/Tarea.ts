@@ -8,6 +8,6 @@ export class Tarea{
   horaFin: number = 0;
   horasAcumuladas: number = 0;
   status: string ="Sin comenzar";
-  usuario: Usuario;
+  idUsuarioTarea: number;
   descripcion: string;
 }
