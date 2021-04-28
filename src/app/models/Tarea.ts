@@ -1,7 +1,7 @@
 import { Usuario } from "./Usuario";
 
 export class Tarea{
-  idTarea: number;
+  idTarea?: number;
   idAsociado:number;
   nombreTarea: string;
   horaInicio: number= 0;

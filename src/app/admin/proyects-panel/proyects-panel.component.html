@@ -3,7 +3,7 @@
   <hr />
   <!-- Formulario -->
 
-  <form (ngSubmit)="agregar( f )" #f="ngForm">
+  <form (ngSubmit)="agregar()" [formGroup]="createProyecto">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label"
         >Nombre del proyecto</label
@@ -12,9 +12,7 @@
         type="text"
         class="form-control"
         placeholder="Nombre del proyecto"
-        required
-        [(ngModel)]="proyecto.nombreProyecto"
-        name="nombre"
+        formControlName="nombreProyecto"
         autocomplete="off"
       />
       <div id="emailHelp" class="form-text fw-bolder">
@@ -26,7 +24,7 @@
 
   <!-- Tabla -->
   <br />
-  <table class="table table-light">
+  <table class="table table-light" *ngIf="proyectos.length > 0">
     <thead>
       <tr>
         <th scope="col">id Proyecto</th>
@@ -69,7 +67,7 @@
     </tbody>
   </table>
 
-  <div class="alert alert-danger" role="alert">
+  <div class="alert alert-danger" role="alert" *ngIf="proyectos.length == 0">
     <h4 class="alert-heading">No hay proyectos todavia</h4>
     <p>No hay tareas en este proyecto puedes agregar un proyecto desde este panel</p>
   </div>

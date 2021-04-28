@@ -1,14 +1,12 @@
 <h1>Panel de tareas</h1>
 <hr />
-<form autocomplete="off" (ngSubmit)="agregar(f)" #f="ngForm">
+<form autocomplete="off" (ngSubmit)="agregar()" [formGroup]="createTarea">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">ID ASOCIADO</label>
     <input
       type="number"
       class="form-control"
-      [value]="proyecto.idProyecto"
-      [(ngModel)]="tarea.idAsociado"
-      name="idAsociado"
+      formControlName="idAsociado"
     />
   </div>
 
@@ -20,8 +18,7 @@
       type="text"
       required
       class="form-control"
-      [(ngModel)]="tarea.nombreTarea"
-      name="nombreTarea"
+      formControlName="nombreTarea"
       autocomplete="off"
     />
   </div>
@@ -35,7 +32,7 @@
     <select
       class="form-select"
       id="inputGroupSelect01"
-      [(ngModel)]="tarea.idUsuarioTarea"
+      formControlName="idUsuarioTarea"
       name="descripcion"
     >
       <option [value]="usuario.idUsuario" *ngFor="let usuario of usuarios">
@@ -50,8 +47,7 @@
     <textarea
       class="form-control"
       aria-label="With textarea"
-      [(ngModel)]="tarea.descripcion"
-      name="descripcion"
+      formControlName="descripcion"
       autocomplete="off"
     ></textarea>
   </div>
@@ -60,10 +56,10 @@
   <div id="emailHelp" class="form-text fw-bolder text-center">
     Todos los campos son obligatorios
   </div>
-  <button type="submit" class="btn btn-success"><i class="fas fa-plus me-2"></i>Agregar Proyecto</button>
+  <button type="submit" class="btn btn-success"><i class="fas fa-plus me-2"></i>Agregar Tarea</button>
 </form>
 <br />
-<table class="table table-light">
+<table class="table table-light" *ngIf="tareasProyecto.length > 0">
   <thead>
     <tr>
       <th scope="col">idTarea</th>
@@ -100,7 +96,7 @@
   </tbody>
 </table>
 
-<div class="alert alert-danger" role="alert">
+<div class="alert alert-danger" role="alert" *ngIf="tareasProyecto.length == 0">
   <h4 class="alert-heading">No hay tareas todavia</h4>
   <p>No hay tareas en este proyecto puedes agregar un proyecto desde este panel</p>
 </div>

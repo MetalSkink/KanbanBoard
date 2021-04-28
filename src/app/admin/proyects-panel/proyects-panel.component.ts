@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Proyecto } from '../../models/Proyecto';
 import { ProyectService } from '../../services/proyect.service';
 import Swal from "sweetalert2";
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-proyects-panel',
@@ -11,18 +11,23 @@ import { NgForm } from '@angular/forms';
 })
 export class ProyectsPanelComponent implements OnInit {
 
-  proyectos:Proyecto[];
-  proyecto = new Proyecto();
+  createProyecto:FormGroup;
+  proyectos:Proyecto[]=[];
+  submitted=false;
 
-  constructor(private _proyectService: ProyectService) {
+
+  constructor(private _proyectService: ProyectService,
+              private fb:FormBuilder) {
+    this.createProyecto=this.fb.group({
+      nombreProyecto:['',Validators.required]
+    })
+  }
+
+  ngOnInit(): void {
     this._proyectService.getProyectos().subscribe(data =>{
       this.proyectos= data;
       console.log(data);
     });
-  }
-
-  ngOnInit(): void {
-    console.log("soy el init");
 
   }
 
@@ -43,22 +48,16 @@ export class ProyectsPanelComponent implements OnInit {
           });
       }
     });
-
-    // this._proyectService.deleteProyecto(id).subscribe(()=>{
-    // this._proyectService.getProyectos().subscribe(data=>{
-    // this.proyectos= data;
-    // })
-    // });
   }
 
-  agregar(form:NgForm){
-    if (form.invalid){
-      console.log("formulario no valido");
-      return;
+  agregar(){
+    if(this.createProyecto.invalid){
+      return
     }
-    console.log(form);
-    console.log(this.proyecto);
-    this._proyectService.agregarProyecto(this.proyecto).subscribe(()=>{
+    const proyecto:Proyecto={
+      nombreProyecto: this.createProyecto.value.nombreProyecto
+    }
+    this._proyectService.agregarProyecto(proyecto).subscribe(()=>{
       this._proyectService.getProyectos().subscribe(data=>{
         this.proyectos= data;
         })

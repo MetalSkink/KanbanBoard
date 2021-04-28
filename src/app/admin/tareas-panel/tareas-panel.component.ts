@@ -5,7 +5,7 @@ import { Usuario } from 'src/app/models/Usuario';
 import { Tarea } from '../../models/Tarea';
 import { TareaService } from '../../services/tarea.service';
 import { UsuarioService } from '../../services/usuario.service';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Proyecto } from '../../models/Proyecto';
 import { ProyectService } from '../../services/proyect.service';
 
@@ -17,17 +17,24 @@ import { ProyectService } from '../../services/proyect.service';
 })
 export class TareasPanelComponent implements OnInit {
 
+  createTarea:FormGroup;
   usuarios:Usuario[];
-  tareasProyecto: Tarea[];
-  tarea= new Tarea();
+  tareasProyecto: Tarea[]=[];
   proyecto = new Proyecto();
   idNumber:number;
 
-  constructor(private _tareasService:TareaService,
+  constructor(private fb:FormBuilder,
+              private _tareasService:TareaService,
               private _usuariosService:UsuarioService,
               private _proyectosService:ProyectService,
               private _route:ActivatedRoute) {
                 // console.log(this._route.snapshot.paramMap.get('id'));
+                this.createTarea=this.fb.group({
+                  nombreTarea:['',Validators.required],
+                  descripcion:['',Validators.required],
+                  idAsociado:['',Validators.required],
+                  idUsuarioTarea:['',Validators.required]
+                })
               }
 
   ngOnInit(): void {
@@ -48,11 +55,20 @@ export class TareasPanelComponent implements OnInit {
     this._proyectosService.getProyecto(idNumber).subscribe(data3=>{
       this.proyecto=data3;
       this.tareasProyecto=data3.tareas;
+      console.log(data3);
 
       console.log(this.proyecto);
       console.log(this.tareasProyecto);
+      this.createTarea.setValue({
+        idAsociado: this.proyecto.idProyecto,
+        nombreTarea:null,
+        descripcion: null,
+        idUsuarioTarea: null
+      })
 
     })
+
+
 
 
   }
@@ -61,7 +77,7 @@ export class TareasPanelComponent implements OnInit {
     console.log("se borrara la tarea con el ID " +idTarea);
     Swal.fire({
       title: '¿Esta seguro?',
-      text: '¿Esta seguro que quiere borrar la tareas con el ID: ',
+      text: '¿Esta seguro que quiere borrar la tarea con el ID: '+idTarea+'?',
       icon: 'question',
       showConfirmButton: true,
       showCancelButton: true
@@ -79,13 +95,25 @@ export class TareasPanelComponent implements OnInit {
     });
   }
 
-  agregar(form:NgForm){
-    if (form.invalid){
-      console.log("formulario no valido");
-      return;
+  agregar(){
+    if(this.createTarea.invalid){
+      return
     }
-    console.log(this.tarea);
-    this._tareasService.agregarTarea(this.tarea).subscribe(()=>{
+    const tarea:Tarea={
+      idAsociado: this.createTarea.value.idAsociado,
+      nombreTarea: this.createTarea.value.nombreTarea,
+      idUsuarioTarea: Number(this.createTarea.value.idUsuarioTarea),
+      descripcion: this.createTarea.value.descripcion,
+      status: "Sin empezar",
+      horaInicio: 0,
+      horaFin: 0,
+      horasAcumuladas: 0
+    }
+
+    console.log(tarea);
+    let id = this._route.snapshot.paramMap.get('id');
+    let idNumber = Number(id);
+    this._tareasService.agregarTarea(tarea).subscribe(()=>{
       this._proyectosService.getProyecto(this.idNumber).subscribe(data=>{
         this.tareasProyecto=data.tareas;
       })
