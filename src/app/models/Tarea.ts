@@ -1,13 +1,16 @@
-import { Usuario } from "./Usuario";
+import { Bitacora } from './Bitacora';
+import { Status } from './Status';
+import { Accion } from './Accion';
+import { Columna } from './Columna';
 
 export class Tarea{
   idTarea?: number;
-  idAsociado:number;
   nombreTarea: string;
-  horaInicio: number= 0;
-  horaFin: number = 0;
-  horasAcumuladas: number = 0;
-  status: string ="Sin comenzar";
+  idAsociado:number;
   idUsuarioTarea: number;
-  descripcion: string;
+  bitacoras?:Bitacora[];
+  status: Status;
+  accion:Accion;
+  columna:Columna;
+  descripcion?: string;
 }

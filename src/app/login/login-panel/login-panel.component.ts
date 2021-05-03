@@ -3,6 +3,9 @@ import { Usuario } from '../../models/Usuario';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
+import { LoginUsuario } from 'src/app/models/login-usuario';
+import { TokenService } from 'src/app/services/token.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login-panel',
@@ -15,17 +18,22 @@ export class LoginPanelComponent implements OnInit {
   logeado:boolean= false;
   idUsuario:number;
 
-  constructor(private router:Router) {
-    this.logeado=Boolean(localStorage.getItem('sesion'));
-    console.log(this.logeado);
-    if (this.logeado) {
-      console.log('te voy a redirigir al board');
-      this.router.navigateByUrl('/board');
+  //NUEVOS CAMPOS
+  isLogged = false;
+  isLoginFail= false;
+  loginUsuario : LoginUsuario;
+  nombreUsuario: string;
+  password: string;
+  roles: string[] = [];
 
-    }else{
-      console.log('te quedas en el login');
-      this.router.navigateByUrl('/login');
-    }
+  errMsj:string;
+
+  constructor(
+    private router:Router,
+    private tokenService:TokenService,
+    private authService:AuthService) {
+
+    //CODIGO QUE NO SE SI BORRAR
     // this.idUsuario=Number(localStorage.getItem('nControl'));
     // this._usuariosServive.getUsuario(this.idUsuario).subscribe(data=>{
     //   console.log(data);
@@ -35,25 +43,42 @@ export class LoginPanelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  login(form:NgForm){
-    if (form.invalid){
-      console.log("formulario no valido");
-      return;
+    if(this.tokenService.getToken()){
+      this.isLogged= true;
+      this.isLoginFail= false;
+      this.roles= this.tokenService.getAuthorities();
     }
-    console.log(this.usuario);
-    let guardarNumero:string= String(this.usuario.idUsuario);
-
-    console.log("El id que se esta guardando es "+guardarNumero);
-
-
-    localStorage.setItem('nControl', guardarNumero);
-    localStorage.setItem('sesion', 'true');
-
-    this.router.navigateByUrl('/board');
-
-
+    if(this.isLogged= true){
+      this.router.navigate(["/board"])
+    }
+    //PARA QUE NO REGRESE AL LOGIN SI YA ESTA LOGEADO
+    //if ( this.isLogged= true) {
+      //this.router.navigate(["/board"])
+    //}
   }
 
+  onLogin(){
+    this.loginUsuario = new LoginUsuario(this.nombreUsuario, this.password);
+    this.authService.login(this.loginUsuario).subscribe(
+      data => {
+        this.isLogged =true;
+        this.isLoginFail=false;
+        console.log(data);
+
+        this.tokenService.setToken(data.token);
+        this.tokenService.setUsername(data.nombreUsuario);
+        this.tokenService.setAuthorities(data.authorities);
+        this.roles = data.authorities;
+        this.router.navigate(["/board"])
+
+      },
+      err =>{
+        //console.log(err);
+        this.isLogged = false;
+        this.isLoginFail= true;
+        this.errMsj = err.error.message;
+        console.log(this.errMsj);
+      }
+    );
+  }
 }

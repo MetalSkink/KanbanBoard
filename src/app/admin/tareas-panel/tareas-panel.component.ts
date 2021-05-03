@@ -8,6 +8,8 @@ import { UsuarioService } from '../../services/usuario.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Proyecto } from '../../models/Proyecto';
 import { ProyectService } from '../../services/proyect.service';
+import { AdminService } from '../../services/admin.service';
+import { Accion } from '../../models/Accion';
 
 
 @Component({
@@ -19,21 +21,24 @@ export class TareasPanelComponent implements OnInit {
 
   createTarea:FormGroup;
   usuarios:Usuario[];
+  acciones:Accion[];
   tareasProyecto: Tarea[]=[];
   proyecto = new Proyecto();
   idNumber:number;
 
   constructor(private fb:FormBuilder,
-              private _tareasService:TareaService,
               private _usuariosService:UsuarioService,
               private _proyectosService:ProyectService,
+              private _adminService:AdminService,
+              private _tareasService:TareaService,
               private _route:ActivatedRoute) {
                 // console.log(this._route.snapshot.paramMap.get('id'));
                 this.createTarea=this.fb.group({
                   nombreTarea:['',Validators.required],
                   descripcion:['',Validators.required],
                   idAsociado:['',Validators.required],
-                  idUsuarioTarea:['',Validators.required]
+                  idUsuarioTarea:['',Validators.required],
+                  idAccion:['',Validators.required]
                 })
               }
 
@@ -52,6 +57,20 @@ export class TareasPanelComponent implements OnInit {
       console.log(this.usuarios);
     });
 
+    this._adminService.getAcciones().subscribe(data=>{
+      this.acciones=data;
+    })
+
+    this.getTareasDeProyecto();
+
+
+
+
+  }
+
+  getTareasDeProyecto():void{
+    let id = this._route.snapshot.paramMap.get('id');
+    let idNumber = Number(id);
     this._proyectosService.getProyecto(idNumber).subscribe(data3=>{
       this.proyecto=data3;
       this.tareasProyecto=data3.tareas;
@@ -63,64 +82,85 @@ export class TareasPanelComponent implements OnInit {
         idAsociado: this.proyecto.idProyecto,
         nombreTarea:null,
         descripcion: null,
-        idUsuarioTarea: null
+        idUsuarioTarea: null,
+        idAccion:1
       })
 
     })
-
-
-
-
   }
 
-  borrarTarea(idTarea:number){
-    console.log("se borrara la tarea con el ID " +idTarea);
-    Swal.fire({
-      title: '¿Esta seguro?',
-      text: '¿Esta seguro que quiere borrar la tarea con el ID: '+idTarea+'?',
-      icon: 'question',
-      showConfirmButton: true,
-      showCancelButton: true
-    }).then(resp =>{
-      if (resp.value){
-        let id = this._route.snapshot.paramMap.get('id');
-        let idNumber = Number(id);
-        this._tareasService.deleteTarea(idTarea).subscribe(()=>{
-          this._proyectosService.getProyecto(idNumber).subscribe(data=>{
-            this.tareasProyecto=data.tareas;
-          })
-        });
+  // borrarTarea(idTarea:number){
+  //   console.log("se borrara la tarea con el ID " +idTarea);
+  //   Swal.fire({
+  //     title: '¿Esta seguro?',
+  //     text: '¿Esta seguro que quiere borrar la tarea con el ID: '+idTarea+'?',
+  //     icon: 'question',
+  //     showConfirmButton: true,
+  //     showCancelButton: true
+  //   }).then(resp =>{
+  //     if (resp.value){
+  //       let id = this._route.snapshot.paramMap.get('id');
+  //       let idNumber = Number(id);
+  //       this._tareasService.deleteTarea(idTarea).subscribe(()=>{
+  //         this._proyectosService.getProyecto(idNumber).subscribe(data=>{
+  //           this.tareasProyecto=data.tareas;
+  //         })
+  //       });
 
-      }
-    });
-  }
+  //     }
+  //   });
+  // }
 
-  agregar(){
-    if(this.createTarea.invalid){
-      return
-    }
-    const tarea:Tarea={
-      idAsociado: this.createTarea.value.idAsociado,
+  // agregar(){
+  //   if(this.createTarea.invalid){
+  //     return
+  //   }
+  //   const tarea:Tarea={
+  //     idAsociado: this.createTarea.value.idAsociado,
+  //     nombreTarea: this.createTarea.value.nombreTarea,
+  //     idUsuarioTarea: Number(this.createTarea.value.idUsuarioTarea),
+  //     descripcion: this.createTarea.value.descripcion,
+
+  //   }
+
+  //   console.log(tarea);
+  //   let id = this._route.snapshot.paramMap.get('id');
+  //   let idNumber = Number(id);
+  //   this._tareasService.agregarTarea(tarea).subscribe(()=>{
+  //     this._proyectosService.getProyecto(this.idNumber).subscribe(data=>{
+  //       this.tareasProyecto=data.tareas;
+  //     })
+  //   })
+
+  // }
+agregar(){
+  if(this.createTarea.invalid){
+         return
+     }
+
+     const tarea:Tarea={
+      idAsociado: Number(this._route.snapshot.paramMap.get('id')),
       nombreTarea: this.createTarea.value.nombreTarea,
       idUsuarioTarea: Number(this.createTarea.value.idUsuarioTarea),
       descripcion: this.createTarea.value.descripcion,
-      status: "Sin empezar",
-      horaInicio: 0,
-      horaFin: 0,
-      horasAcumuladas: 0
-    }
+      accion:{
+        idAccion: Number(this.createTarea.value.idAccion),
+      },
+      columna: {
+        idColumna: 1
+      },
+      status: {
+        idStatus: 1
+      },
+      }
+      console.log(tarea);
 
-    console.log(tarea);
-    let id = this._route.snapshot.paramMap.get('id');
-    let idNumber = Number(id);
-    this._tareasService.agregarTarea(tarea).subscribe(()=>{
-      this._proyectosService.getProyecto(this.idNumber).subscribe(data=>{
-        this.tareasProyecto=data.tareas;
-      })
-    })
+      this._tareasService.agregarTarea(tarea).subscribe(()=>{
+        this.getTareasDeProyecto();
+      });
+      //this.getTareasDeProyecto();
 
-  }
-
+}
 
 
 }

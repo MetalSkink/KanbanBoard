@@ -10,18 +10,19 @@ import { Tarea } from '../../models/Tarea';
 })
 export class BoardComponent implements OnInit {
 
-  idUsuario:number;
-  tareasDeUsuario:Tarea[];
-  backlog:Tarea[];
+  nombreUsuario:string;
+  tareasDeUsuario:Tarea[]=[];
 
   constructor(private _usuariosService: UsuarioService) { }
 
   ngOnInit(): void {
-    this.idUsuario=Number(localStorage.getItem('nControl'));
-    this._usuariosService.getUsuario(this.idUsuario).subscribe(data=>{
-      console.log(data.tareasDeUsuario);
-      this.tareasDeUsuario=data.tareasDeUsuario;
-      this.backlog=data.tareasDeUsuario;
+    this.nombreUsuario=String(sessionStorage.getItem('AuthUsername'));
+    console.log(this.nombreUsuario);
+
+    this._usuariosService.getUsuario(this.nombreUsuario).subscribe(data=>{
+      console.log(data);
+      this.tareasDeUsuario=data.tareas;
+      console.log(this.tareasDeUsuario);
 
     })
   }

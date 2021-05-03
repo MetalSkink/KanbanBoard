@@ -5,5 +5,5 @@ export class Usuario{
   password: string;
   nControl: number;
   permisos:number;
-  tareasDeUsuario: Tarea[];
+  tareas: Tarea[];
 }

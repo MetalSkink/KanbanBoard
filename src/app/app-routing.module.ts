@@ -6,13 +6,15 @@ import { UsersPanelComponent } from './admin/users-panel/users-panel.component';
 import { LoginPanelComponent } from './login/login-panel/login-panel.component';
 import { BoardComponent } from './board/board/board.component';
 
+import { ProdGuardGuard as guard } from "./guards/prod-guard.guard";
+
 const routes: Routes = [
   { path: 'login', component: LoginPanelComponent },
-  { path: 'board', component: BoardComponent },
-  { path: 'proyectos', component: ProyectsPanelComponent },
-  { path: 'tareas/:id', component: TareasPanelComponent },
-  { path: 'usuarios', component: UsersPanelComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'board' }
+  { path: 'board', component: BoardComponent, canActivate: [guard],data: {expectedRol: ['admin','user']}},
+  { path: 'proyectos', component: ProyectsPanelComponent, canActivate: [guard],data: {expectedRol: ['admin']}},
+  { path: 'tareas/:id', component: TareasPanelComponent, canActivate: [guard],data: {expectedRol: ['admin']}},
+  { path: 'usuarios', component: UsersPanelComponent, canActivate: [guard],data: {expectedRol: ['admin']}},
+  { path: '**', pathMatch: 'full', redirectTo: 'login' }
 ];
 
 @NgModule({

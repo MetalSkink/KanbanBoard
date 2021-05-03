@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
@@ -14,28 +15,41 @@
     </div>
 
     <!-- Login Form -->
-    <form (ngSubmit)="login( f )" #f="ngForm">
+    <form (ngSubmit)="onLogin()" #f="ngForm">
+      <label for="nombreUsuario">Nombre de Usuario</label>
       <input
         type="text"
-        id="login"
+        id="nombreUsuario"
         class="fadeIn second mt-1"
-        name="login"
-        [(ngModel)]="usuario.idUsuario"
-        placeholder="Numero de control"
+        name="nombreUsuario"
+        [(ngModel)]="nombreUsuario"
+        required
+        placeholder="Nombre usuario"
       />
+      <label for="password">Contraseña</label>
       <input
         type="password"
+        name="password"
         id="password"
         class="fadeIn third"
-        name="login"
-        [(ngModel)]="usuario.password"
+        [(ngModel)]="password"
         placeholder="Contraseña"
+        required
       />
-      <input type="submit" class="fadeIn fourth mt-2" value="Iniciar Sesión" />
+
+      <!-- <input type="submit" class="fadeIn fourth mt-2" value="Iniciar Sesión" /> -->
+      <div class="form-group mx-2">
+        <button
+          class="btn btn-outline-success btn-block fadeIn fourth mt-2"
+          [disabled]="!f.valid"
+        >
+          <i class="fas fa-sign-in-alt mr-5"></i>   Iniciar Sesión
+        </button>
+      </div>
     </form>
 
     <!-- Remind Passowrd -->
-    <div id="formFooter">
+    <div id="formFooter" class="mt-4">
       <a class="underlineHover" href="#">Forgot Password?</a>
     </div>
   </div>

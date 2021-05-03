@@ -1,6 +1,10 @@
+<app-navbar></app-navbar>
 <div class="content-wrapper">
+  <h2 *ngIf="tareasDeUsuario.length === 0" class="text-center">NO TIENES TAREAS ASIGNADAS</h2>
   <div class="container-wrapper">
+
     <div class="container">
+
       <h2>Backlog</h2>
       <div  class="card"
             cdkDropList
@@ -17,8 +21,8 @@
             <div class="card-body">
               <p class="card-text">
                 {{tarea.descripcion}}<br>
-                <strong>Hora Inicio: </strong> {{tarea.horaInicio}}<br>
-                <strong>Hora Fin: </strong> {{tarea.horaFin}}<br>
+                <strong>Status: </strong> {{tarea.status.nombreStatus}}<br>
+                <strong>Tipo: </strong> {{tarea.accion.nombreAccion}}<br>
                 <strong>Horas Acumuladas: </strong> {{tarea.horasAcumuladas}}<br>
               </p>
               <div class="d-grid gap-2">

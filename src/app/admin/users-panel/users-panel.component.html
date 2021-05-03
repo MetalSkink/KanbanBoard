@@ -1,9 +1,10 @@
+<app-navbar></app-navbar>
 <div class="container mt-10">
   <h1 class="mt-10">Panel de usuarios</h1>
   <hr />
   <!-- Formulario -->
 
-  <form (ngSubmit)="agregar( f )" #f="ngForm">
+  <form (ngSubmit)="agregarUsuario( f )" #f="ngForm">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label"
         >Nombre del usuario</label
@@ -72,42 +73,29 @@
     <thead >
       <tr>
         <th scope="col">id Usuario</th>
-        <th scope="col">Nombres</th>
-        <th scope="col" class="text-center">Numero de Control</th>
-        <th scope="col" class="text-center">Permisos</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th scope="col">Username</th>
+        <th scope="col">Nombre Completo</th>
+        <th scope="col">Correo electronico</th>
+        <!-- <th scope="col" class="text-center">Correo electronico</th> -->
+        <th scope="col" class="text-center">No. Tareas</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let usuario of usuarios">
-        <th scope="row">{{ usuario.idUsuario }}</th>
+        <th scope="row">{{ usuario.id }}</th>
+        <td>{{ usuario.nombreUsuario}}</td>
         <td>{{ usuario.nombre}}</td>
-        <td class="text-center">{{ usuario.nControl }}</td>
-        <td class="text-center">{{ usuario.permisos }}</td>
-        <td>
-          <button type="button" class="btn btn-primary">
-            <i class="fas fa-edit me-2"></i>Editar
-          </button>
-        </td>
+        <td>{{ usuario.email }}</td>
+        <td class="text-center">{{ usuario.tareas.length }}</td>
         <td>
           <button
             type="button"
             class="btn btn-danger"
-            (click)="borrarUsuario(usuario.idUsuario)"
+            (click)="borrarUsuario(usuario.id)"
           >
             <i class="fas fa-trash me-2"></i>Borrar
           </button>
-        </td>
-        <td>
-          <!-- <button
-            type="button"
-            class="btn btn-warning"
-            [routerLink]="['/tareas/', usuario.idUsuario]"
-          >
-            <i class="fas fa-tasks me-2"></i>Ver tareas
-          </button> -->
         </td>
       </tr>
     </tbody>

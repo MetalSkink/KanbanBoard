@@ -62,5 +62,6 @@ export class ProyectsPanelComponent implements OnInit {
         this.proyectos= data;
         })
     });
+
   }
 }

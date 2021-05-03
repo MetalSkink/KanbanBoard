@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,27 +9,36 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  logeado:boolean= false;
+
   admin:boolean= false;
+  isLogged = false;
 
-  constructor(private router: Router) {
-    this.logeado=Boolean(localStorage.getItem('sesion'));
-    console.log(this.logeado);
+  roles:string[];
+  isAdmin: boolean = false;
 
-  }
+
+  constructor(private tokenService:TokenService,
+              private router:Router) { }
 
   ngOnInit(): void {
-    console.log("ESTE ES EL INIT");
-
+    if(this.tokenService.getToken()){
+      this.isLogged=true;
+    }else{
+      this.isLogged=false;
+    }
+    this.roles = this.tokenService.getAuthorities();
+    this.roles.forEach(rol =>{
+      if(rol === "ROLE_ADMIN"){
+        this.isAdmin=true;
+      }
+    })
   }
 
-  cerrarSesion(){
-    console.log("borrando localStoragae");
-
-    localStorage.removeItem('nControl');
-    localStorage.removeItem('sesion');
-    this.router.navigateByUrl('/login');
-
+  OnLogOut():void{
+    this.tokenService.logOut();
+    this.isLogged=false;
+    //window.location.reload();
+    this.router.navigate(["/login"]);
   }
 
 

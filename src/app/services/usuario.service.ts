@@ -8,22 +8,22 @@ import { Usuario } from '../models/Usuario';
 export class UsuarioService {
 
   constructor(private http:HttpClient) { }
-  url='http://localhost:8080/usuarios';
+  url='http://localhost:8080/auth2';
 
   getUsuarios(){
     return this.http.get<Usuario[]>(this.url);
   }
 
-  getUsuario(id:number){
-    return this.http.get<Usuario>(`${this.url}/${id}`);
+  getUsuario(nombre:string){
+    return this.http.get<Usuario>(`${this.url}/${nombre}`);
   }
 
-  deleteUsuario(id:number){
-    return this.http.delete(`${this.url}/${id}`);
-  }
+  // deleteUsuario(id:number){
+  //   return this.http.delete(`${this.url}/${id}`);
+  // }
 
-  agregarProyecto(usuario:Usuario){
-    return this.http.post(this.url,usuario);
-  }
+  // agregarProyecto(usuario:Usuario){
+  //   return this.http.post(this.url,usuario);
+  // }
 
 }
