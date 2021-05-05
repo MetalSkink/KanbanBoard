@@ -79,7 +79,7 @@
 <table class="table table-light" *ngIf="tareasProyecto.length > 0">
   <thead>
     <tr>
-      <th scope="col">idTarea</th>
+      <!-- <th scope="col">idTarea</th> -->
       <th scope="col">Nombre Tarea</th>
       <th scope="col">Encargado</th>
       <th scope="col">Status</th>
@@ -92,7 +92,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let tarea of tareasProyecto">
-      <th scope="row">{{ tarea.idTarea }}</th>
+      <!-- <th scope="row">{{ tarea.idTarea }}</th> -->
       <td>{{ tarea.nombreTarea }}</td>
       <td class="text-center">{{ tarea.idUsuarioTarea}}</td>
       <td>{{ tarea.status.nombreStatus }}</td>
@@ -100,15 +100,15 @@
       <td>{{ tarea.columna.nombreColumna }}</td>
       <td>{{ tarea.descripcion }}</td>
       <td>
-        <button type="button" class="btn btn-primary">
-          <i class="fas fa-edit me-2"></i>Editar
+        <button type="button" class="btn btn-warning">
+          <i class="fas fa-info-circle me-2"></i>Detalles
         </button>
       </td>
       <td>
         <button
         type="button"
         class="btn btn-danger"
-        (click)="borrarTarea(tarea.idTarea)"
+        (click)="borrar(tarea)"
         >
         <i class="fas fa-trash me-2"></i>Borrar
       </button>

@@ -25,4 +25,12 @@ export class TareaService {
   agregarTarea(tarea:Tarea){
     return this.http.post(this.url,tarea);
   }
+
+  bajarColumnaTarea(id:number,tarea: Tarea){
+    return this.http.put<any>(this.url + `/bajar/${id}`,tarea);
+  }
+
+  subirColumnaTarea(id:number,tarea: Tarea){
+    return this.http.put<any>(this.url + `/subir/${id}`,tarea);
+  }
 }
