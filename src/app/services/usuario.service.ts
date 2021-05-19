@@ -18,9 +18,9 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.url}/${nombre}`);
   }
 
-  // deleteUsuario(id:number){
-  //   return this.http.delete(`${this.url}/${id}`);
-  // }
+   deleteUsuario(id:number){
+     return this.http.delete(`${this.url}/${id}`);
+   }
 
   // agregarProyecto(usuario:Usuario){
   //   return this.http.post(this.url,usuario);

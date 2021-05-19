@@ -3,19 +3,19 @@
   <h2 *ngIf="tareasDeUsuario.length === 0" class="text-center">
     NO TIENES TAREAS ASIGNADAS
   </h2>
-  <div class="container-wrapper">
+  <div *ngIf="tareasDeUsuario.length > 0" class="container-wrapper">
     <div class="container">
       <h2>Backlog</h2>
-      <div class="card border-dark" id="backlog">
+      <div class="card" id="backlog">
         <!-- #backlogList="cdkDropList"
             [cdkDropListData]="backlog" -->
         <div class="card-body">
           <!-- Este es el card de ejemplo -->
           <div
-            class="card m-3"
+            class="card m-3 border-dark"
             *ngFor="let tarea of Backlog"
             style="max-height: 18rem"
-            [ngClass]="{ 'border-info': tarea.status.idStatus === 1 }"
+            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2  }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
@@ -43,7 +43,7 @@
                   <button
                     type="button"
                     class="btn btn-success"
-                    (click)="empezar()"
+                    (click)="empezar(tarea)"
                     [disabled]="tarea.status.idStatus === 2"
                   >
                     <i class="fas fa-clock me-2"></i>Empezar
@@ -53,8 +53,8 @@
                   <button
                     type="button"
                     class="btn btn-danger"
-                    (click)="pausar()"
-                    [disabled]="tarea.status.idStatus === 1"
+                    (click)="pausar(tarea)"
+                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3"
                   >
                     <i class="fas fa-user-clock me-2"></i>Pausar
                   </button>
@@ -78,10 +78,10 @@
         <div class="card-body">
           <!-- Este es el card de ejemplo -->
           <div
-            class="card m-3"
+            class="card m-3 border-dark"
             *ngFor="let tarea of toDo"
             style="max-height: 18rem"
-            [ngClass]="{ 'border-info': tarea.status.idStatus === 1 }"
+            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2  }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
@@ -102,7 +102,7 @@
                   <button
                     type="button"
                     class="btn btn-success"
-                    (click)="empezar()"
+                    (click)="empezar(tarea)"
                     [disabled]="tarea.status.idStatus === 2"
                   >
                     <i class="fas fa-clock me-2"></i>Empezar
@@ -112,8 +112,8 @@
                   <button
                     type="button"
                     class="btn btn-danger"
-                    (click)="pausar()"
-                    [disabled]="tarea.status.idStatus === 1"
+                    (click)="pausar(tarea)"
+                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3"
                   >
                     <i class="fas fa-user-clock me-2"></i>Pausar
                   </button>
@@ -137,10 +137,10 @@
         <div class="card-body">
           <!-- Este es el card de ejemplo -->
           <div
-            class="card m-3"
+            class="card m-3 border-dark"
             *ngFor="let tarea of Doing"
             style="max-height: 18rem"
-            [ngClass]="{ 'border-info': tarea.status.idStatus === 1 }"
+            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2  }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
@@ -161,7 +161,7 @@
                   <button
                     type="button"
                     class="btn btn-success"
-                    (click)="empezar()"
+                    (click)="empezar(tarea)"
                     [disabled]="tarea.status.idStatus === 2"
                   >
                     <i class="fas fa-clock me-2"></i>Empezar
@@ -171,8 +171,8 @@
                   <button
                     type="button"
                     class="btn btn-danger"
-                    (click)="pausar()"
-                    [disabled]="tarea.status.idStatus === 1"
+                    (click)="pausar(tarea)"
+                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3"
                   >
                     <i class="fas fa-user-clock me-2"></i>Pausar
                   </button>
@@ -196,10 +196,10 @@
         <div class="card-body">
           <!-- Este es el card de ejemplo -->
           <div
-            class="card m-3"
+            class="card m-3 border-dark "
             *ngFor="let tarea of Done"
             style="max-height: 18rem"
-            [ngClass]="{ 'border-info': tarea.status.idStatus === 1 }"
+            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2  }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
@@ -230,8 +230,8 @@
                   <button
                     type="button"
                     class="btn btn-danger"
-                    (click)="pausar()"
-                    [disabled]="tarea.status.idStatus === 1"
+                    (click)="pausar(tarea)"
+                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3"
                   >
                     <i class="fas fa-user-clock me-2"></i>Pausar
                   </button>

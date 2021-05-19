@@ -4,58 +4,71 @@
   <hr />
   <!-- Formulario -->
 
-  <form (ngSubmit)="agregarUsuario( f )" #f="ngForm">
+  <form (ngSubmit)="agregarUsuario()" [formGroup]="createUsuario">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label"
-        >Nombre del usuario</label
+        >Nombre de la Persona</label
       >
       <input
         type="text"
         class="form-control mb-3"
         required
-        [(ngModel)]="usuario.nombre"
+        formControlName="nombre"
         autocomplete="off"
         name="nombre"
       />
-      <label for="exampleInputEmail1" class="form-label"
-        >Contraseña</label
-      >
+      <label for="exampleInputEmail1" class="form-label">Contraseña</label>
       <input
-        type="text"
+        type="password"
         class="form-control mb-3"
         required
-        [(ngModel)]="usuario.password"
+        formControlName="password"
         autocomplete="off"
-        name="nombre"
+        name="password"
       />
 
       <div class="row">
         <div class="col">
-<label for="exampleInputEmail1" class="form-label"
-        >Numero de control</label
-      >
-      <input
-        type="number"
-        class="form-control mb-3"
-        required
-        [(ngModel)]="usuario.nControl"
-        autocomplete="off"
-        name="nombre"
-      />
-
+          <label for="exampleInputEmail1" class="form-label"
+            >Nombre de Usuario</label
+          >
+          <input
+            type="text"
+            class="form-control mb-3"
+            required
+            formControlName="nombreUsuario"
+            autocomplete="off"
+            name="nombre"
+          />
         </div>
         <div class="col">
+          <!-- <label for="exampleInputEmail1" class="form-label">Permisos</label>
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01"
+              >Permisos</label
+            >
+            <select
+              class="form-select"
+              id="inputGroupSelect01"
+              [(ngModel)]="usuario.permisos"
+              name="permisos"
+            >
+              <option selected value="1">Usuario</option>
+              <option value="2">Admin</option>
+            </select>
+          </div> -->
           <label for="exampleInputEmail1" class="form-label"
-          >Permisos</label
-        >
-        <div class="input-group mb-3">
-          <label class="input-group-text" for="inputGroupSelect01">Permisos</label>
-          <select class="form-select" id="inputGroupSelect01" [(ngModel)]="usuario.permisos"
-          name="permisos">
-            <option selected value="1">Usuario</option>
-            <option value="2">Admin</option>
-          </select>
-        </div>
+            >Contraseña</label
+          >
+          <input
+            type="email"
+            class="form-control mb-3"
+            required
+            formControlName="email"
+            autocomplete="off"
+            name="email"
+          />
+
         </div>
       </div>
 
@@ -64,13 +77,15 @@
         Todos los campos son obligatorios
       </div>
     </div>
-    <button type="submit" class="btn btn-success"><i class="fas fa-plus me-2"></i>Agregar usuario</button>
+    <button type="submit" class="btn btn-success">
+      <i class="fas fa-plus me-2"></i>Agregar usuario
+    </button>
   </form>
 
   <!-- Tabla -->
   <br />
   <table class="table table-light">
-    <thead >
+    <thead>
       <tr>
         <th scope="col">id Usuario</th>
         <th scope="col">Username</th>
@@ -84,15 +99,15 @@
     <tbody>
       <tr *ngFor="let usuario of usuarios">
         <th scope="row">{{ usuario.id }}</th>
-        <td>{{ usuario.nombreUsuario}}</td>
-        <td>{{ usuario.nombre}}</td>
+        <td>{{ usuario.nombreUsuario }}</td>
+        <td>{{ usuario.nombre }}</td>
         <td>{{ usuario.email }}</td>
         <td class="text-center">{{ usuario.tareas.length }}</td>
         <td>
           <button
             type="button"
             class="btn btn-danger"
-            (click)="borrarUsuario(usuario.id)"
+            (click)="borrarUsuario(usuario)"
           >
             <i class="fas fa-trash me-2"></i>Borrar
           </button>

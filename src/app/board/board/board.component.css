@@ -14,4 +14,11 @@
 
 .card{
   border-style: solid;
+  border-radius: 6px;
+  border: 1px solid #000000;
+}
+
+button{
+  border-radius: 6px;
+  border: 2px solid #000000;
 }
