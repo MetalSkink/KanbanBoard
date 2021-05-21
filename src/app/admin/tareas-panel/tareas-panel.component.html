@@ -1,28 +1,23 @@
 <app-navbar></app-navbar>
 <div class="container">
-
   <h1>Panel de tareas</h1>
   <hr />
   <form autocomplete="off" (ngSubmit)="agregar()" [formGroup]="createTarea">
     <div class="mb-3">
       <!-- <label for="exampleInputEmail1" class="form-label">ID ASOCIADO</label> -->
-      <input
-      type="hidden"
-      class="form-control"
-      formControlName="idAsociado"
-      />
+      <input type="hidden" class="form-control" formControlName="idAsociado" />
     </div>
 
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label"
-      >Nombre de la tarea</label
+        >Nombre de la tarea</label
       >
       <input
-      type="text"
-      required
-      class="form-control"
-      formControlName="nombreTarea"
-      autocomplete="off"
+        type="text"
+        required
+        class="form-control"
+        formControlName="nombreTarea"
+        autocomplete="off"
       />
     </div>
     <!-- <div class="mb-3">
@@ -33,93 +28,105 @@
     <div class="input-group mb-3">
       <label class="input-group-text" for="inputGroupSelect01">Encargado</label>
       <select
-      class="form-select"
-      id="inputGroupSelect01"
-      formControlName="idUsuarioTarea"
-      name="descripcion"
+        class="form-select"
+        id="inputGroupSelect01"
+        formControlName="idUsuarioTarea"
+        name="descripcion"
       >
-      <option [value]="usuario.id" *ngFor="let usuario of usuarios">
-        {{ usuario.nombre }}
-      </option>
-    </select>
+        <option [value]="usuario.id" *ngFor="let usuario of usuarios">
+          {{ usuario.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="inputGroupSelect01">Accion</label>
+      <select
+        class="form-select"
+        id="inputGroupSelect01"
+        formControlName="idAccion"
+      >
+        <option [value]="accion.idAccion" *ngFor="let accion of acciones">
+          {{ accion.nombreAccion }}
+        </option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-text">Descripción</span><br />
+
+      <textarea
+        class="form-control"
+        aria-label="With textarea"
+        formControlName="descripcion"
+        autocomplete="off"
+      ></textarea>
+    </div>
+
+    <!-- Fin de los inputs -->
+    <div id="emailHelp" class="form-text fw-bolder text-center">
+      <h2>Todos los campos son obligatorios</h2>
+    </div>
+    <button type="submit" class="btn btn-success">
+      <i class="fas fa-plus me-2"></i>Agregar Tarea
+    </button>
+  </form>
+  <br />
+  <table class="table table-light" *ngIf="tareasProyecto.length > 0">
+    <thead>
+      <tr>
+        <!-- <th scope="col">idTarea</th> -->
+        <th scope="col">Nombre Tarea</th>
+        <th scope="col">Encargado</th>
+        <th scope="col">Status</th>
+        <th scope="col">Tipo de accción</th>
+        <th scope="col">Columna</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tarea of tareasProyecto">
+        <!-- <th scope="row">{{ tarea.idTarea }}</th> -->
+        <td>{{ tarea.nombreTarea }}</td>
+        <td class="text-center">{{ tarea.idUsuarioTarea }}</td>
+        <td>{{ tarea.status.nombreStatus }}</td>
+        <td>{{ tarea.accion.nombreAccion }}</td>
+        <td>{{ tarea.columna.nombreColumna }}</td>
+        <td>{{ tarea.descripcion }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-warning"
+            [routerLink]="['/tarea-detalles/', tarea.idTarea]"
+          >
+            <i class="fas fa-info-circle me-2"></i>Detalles
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="borrar(tarea)">
+            <i class="fas fa-trash me-2"></i>Borrar
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-outline-danger" (click)="cancelar(tarea)">
+            <i class="far fa-times-circle me-2"></i>Cancelar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div
+    class="alert alert-danger"
+    role="alert"
+    *ngIf="tareasProyecto.length == 0"
+  >
+    <h4 class="alert-heading">No hay tareas todavia</h4>
+    <p>
+      No hay tareas en este proyecto puedes agregar un proyecto desde este panel
+    </p>
   </div>
-
-  <div class="input-group mb-3">
-    <label class="input-group-text" for="inputGroupSelect01">Accion</label>
-    <select
-    class="form-select"
-    id="inputGroupSelect01"
-    formControlName="idAccion"
-
-    >
-    <option [value]="accion.idAccion" *ngFor="let accion of acciones">
-      {{ accion.nombreAccion }}
-    </option>
-    </select>
-  </div>
-
-  <div class="input-group">
-    <span class="input-group-text">Descripción</span><br>
-
-    <textarea
-    class="form-control"
-    aria-label="With textarea"
-    formControlName="descripcion"
-    autocomplete="off"
-    ></textarea>
-  </div>
-
-  <!-- Fin de los inputs -->
-  <div id="emailHelp" class="form-text fw-bolder text-center">
-    Todos los campos son obligatorios
-  </div>
-  <button type="submit" class="btn btn-success"><i class="fas fa-plus me-2"></i>Agregar Tarea</button>
-</form>
-<br />
-<table class="table table-light" *ngIf="tareasProyecto.length > 0">
-  <thead>
-    <tr>
-      <!-- <th scope="col">idTarea</th> -->
-      <th scope="col">Nombre Tarea</th>
-      <th scope="col">Encargado</th>
-      <th scope="col">Status</th>
-      <th scope="col">Tipo de accción</th>
-      <th scope="col">Columna</th>
-      <th scope="col">Descripcion</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let tarea of tareasProyecto">
-      <!-- <th scope="row">{{ tarea.idTarea }}</th> -->
-      <td>{{ tarea.nombreTarea }}</td>
-      <td class="text-center">{{ tarea.idUsuarioTarea}}</td>
-      <td>{{ tarea.status.nombreStatus }}</td>
-      <td>{{ tarea.accion.nombreAccion }}</td>
-      <td>{{ tarea.columna.nombreColumna }}</td>
-      <td>{{ tarea.descripcion }}</td>
-      <td>
-        <button type="button" class="btn btn-warning">
-          <i class="fas fa-info-circle me-2"></i>Detalles
-        </button>
-      </td>
-      <td>
-        <button
-        type="button"
-        class="btn btn-danger"
-        (click)="borrar(tarea)"
-        >
-        <i class="fas fa-trash me-2"></i>Borrar
-      </button>
-    </td>
-  </tr>
-</tbody>
-</table>
-
-<div class="alert alert-danger" role="alert" *ngIf="tareasProyecto.length == 0">
-  <h4 class="alert-heading">No hay tareas todavia</h4>
-  <p>No hay tareas en este proyecto puedes agregar un proyecto desde este panel</p>
-</div>
-
 </div>

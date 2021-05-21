@@ -17,6 +17,8 @@ import { BoardComponent } from './board/board/board.component'
 import { LoginPanelComponent } from './login/login-panel/login-panel.component';
 import { UsersPanelComponent } from './admin/users-panel/users-panel.component';
 import { ProdInterceptorService } from './interceptors/prod-interceptor.service';
+import { TareaDetallesComponent } from './admin/tareas-panel/tarea-detalles.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { ProdInterceptorService } from './interceptors/prod-interceptor.service'
     UsersPanelComponent,
     LoginPanelComponent,
     BoardComponent,
+    TareaDetallesComponent,
+    SidebarComponent,
 
   ],
   imports: [

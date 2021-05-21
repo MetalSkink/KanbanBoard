@@ -20,6 +20,10 @@ export class TareaService {
     return this.http.get<Tarea[]>(`${this.url}/${id}`);
   }
 
+  getTareaPorId(id: number){
+    return this.http.get<Tarea>(`${this.url}/${id}`);
+  }
+
   deleteTarea(id:number){
     return this.http.delete(`${this.url}/${id}`);
   }
@@ -27,7 +31,7 @@ export class TareaService {
   agregarTarea(tarea:Tarea){
     return this.http.post(this.url,tarea);
   }
-
+  //ops columna
   bajarColumnaTarea(id:number,tarea: Tarea){
     return this.http.put<any>(this.url + `/bajar/${id}`,tarea);
   }
@@ -35,7 +39,7 @@ export class TareaService {
   subirColumnaTarea(id:number,tarea: Tarea){
     return this.http.put<any>(this.url + `/subir/${id}`,tarea);
   }
-
+  //statuses
   statusProgreso(id:number,tarea: Tarea){
     return this.http.put<any>(this.url + `/progreso/${id}`,tarea);
   }
@@ -44,6 +48,14 @@ export class TareaService {
     return this.http.put<any>(this.url + `/pausar/${id}`,tarea);
   }
 
+  statusTerminar(id:number,tarea: Tarea){
+    return this.http.put<any>(this.url + `/terminar/${id}`,tarea);
+  }
+  statusCancelar(id:number,tarea: Tarea){
+    return this.http.put<any>(this.url + `/cancelar/${id}`,tarea);
+  }
+
+  //Bitacoras
   iniciarBitacora(bitacora:Bitacora){
     return this.http.post<any>(this.urlBita + `/iniciarBitacora`,bitacora);
   }
@@ -51,4 +63,6 @@ export class TareaService {
   pausarBitacora(id:number,bitacora:Bitacora){
     return this.http.put<any>(this.urlBita + `/pausarBitacora/${id}`,bitacora);
   }
+
+
 }

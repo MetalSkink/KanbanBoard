@@ -42,9 +42,6 @@ export class TareasPanelComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    let id = this._route.snapshot.paramMap.get('id');
-    let idNumber = Number(id);
-
     this._usuariosService.getUsuarios().subscribe(data2=>{
       this.usuarios=data2;
     });
@@ -54,9 +51,6 @@ export class TareasPanelComponent implements OnInit {
     })
 
     this.getTareasDeProyecto();
-
-
-
 
   }
 
@@ -92,6 +86,22 @@ borrar(tarea:Tarea){
            this._tareasService.deleteTarea(tarea.idTarea).subscribe(()=>{
             this.getTareasDeProyecto();
            });
+         }
+       });
+}
+
+cancelar(tarea:Tarea){
+  Swal.fire({
+         title: '¿Esta seguro que quiere cancelar la tarea "'+tarea.nombreTarea+'"?',
+         text: 'Esto hara que el programador ya no pueda trabajar en ella',
+         icon: 'question',
+         showConfirmButton: true,
+         showCancelButton: true
+       }).then(resp =>{
+         if (resp.value){
+            this._tareasService.statusCancelar(tarea.idTarea, tarea).subscribe(()=>{
+              this.getTareasDeProyecto();
+            });
          }
        });
 }

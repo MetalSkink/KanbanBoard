@@ -7,15 +7,13 @@
     <div class="container">
       <h2>Backlog</h2>
       <div class="card" id="backlog">
-        <!-- #backlogList="cdkDropList"
-            [cdkDropListData]="backlog" -->
         <div class="card-body">
           <!-- Este es el card de ejemplo -->
           <div
             class="card m-3 border-dark"
             *ngFor="let tarea of Backlog"
             style="max-height: 18rem"
-            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2  }"
+            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5 }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
@@ -44,7 +42,7 @@
                     type="button"
                     class="btn btn-success"
                     (click)="empezar(tarea)"
-                    [disabled]="tarea.status.idStatus === 2"
+                    [disabled]="tarea.status.idStatus === 2 || tarea.status.idStatus === 5"
                   >
                     <i class="fas fa-clock me-2"></i>Empezar
                   </button>
@@ -54,7 +52,7 @@
                     type="button"
                     class="btn btn-danger"
                     (click)="pausar(tarea)"
-                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3"
+                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3 || tarea.status.idStatus === 5"
                   >
                     <i class="fas fa-user-clock me-2"></i>Pausar
                   </button>
@@ -81,7 +79,7 @@
             class="card m-3 border-dark"
             *ngFor="let tarea of toDo"
             style="max-height: 18rem"
-            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2  }"
+            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5  }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
@@ -103,7 +101,7 @@
                     type="button"
                     class="btn btn-success"
                     (click)="empezar(tarea)"
-                    [disabled]="tarea.status.idStatus === 2"
+                    [disabled]="tarea.status.idStatus === 2 || tarea.status.idStatus === 5"
                   >
                     <i class="fas fa-clock me-2"></i>Empezar
                   </button>
@@ -113,7 +111,7 @@
                     type="button"
                     class="btn btn-danger"
                     (click)="pausar(tarea)"
-                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3"
+                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3 || tarea.status.idStatus === 5"
                   >
                     <i class="fas fa-user-clock me-2"></i>Pausar
                   </button>
@@ -140,7 +138,7 @@
             class="card m-3 border-dark"
             *ngFor="let tarea of Doing"
             style="max-height: 18rem"
-            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2  }"
+            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5  }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
@@ -162,7 +160,7 @@
                     type="button"
                     class="btn btn-success"
                     (click)="empezar(tarea)"
-                    [disabled]="tarea.status.idStatus === 2"
+                    [disabled]="tarea.status.idStatus === 2 || tarea.status.idStatus === 5"
                   >
                     <i class="fas fa-clock me-2"></i>Empezar
                   </button>
@@ -172,7 +170,7 @@
                     type="button"
                     class="btn btn-danger"
                     (click)="pausar(tarea)"
-                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3"
+                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3 || tarea.status.idStatus === 5"
                   >
                     <i class="fas fa-user-clock me-2"></i>Pausar
                   </button>
@@ -199,7 +197,7 @@
             class="card m-3 border-dark "
             *ngFor="let tarea of Done"
             style="max-height: 18rem"
-            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2  }"
+            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5  }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
@@ -221,7 +219,7 @@
                     type="button"
                     class="btn btn-success"
                     (click)="empezar()"
-                    [disabled]="tarea.status.idStatus === 2"
+                    [disabled]="tarea.status.idStatus === 2 || tarea.status.idStatus === 5"
                   >
                     <i class="fas fa-clock me-2"></i>Empezar
                   </button>
@@ -231,7 +229,7 @@
                     type="button"
                     class="btn btn-danger"
                     (click)="pausar(tarea)"
-                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3"
+                    [disabled]="tarea.status.idStatus === 1 || tarea.status.idStatus === 3 || tarea.status.idStatus === 5"
                   >
                     <i class="fas fa-user-clock me-2"></i>Pausar
                   </button>

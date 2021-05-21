@@ -1,0 +1,86 @@
+<app-navbar></app-navbar>
+<div class="container mt-3">
+  <h2 class="fs-2">Detalles de la tarea</h2>
+  <hr />
+  <br />
+  <form autocomplete="off" (ngSubmit)="editar()" [formGroup]="formularioTarea">
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">Nombre Tarea</span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Username"
+        aria-label="Username"
+        aria-describedby="basic-addon1"
+        formControlName="nombreTarea"
+      />
+    </div>
+
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="inputGroupSelect01">Encargado</label>
+      <select
+        class="form-select"
+        id="inputGroupSelect01"
+        formControlName="idUsuarioTarea"
+        name="idUsuarioTarea"
+      >
+        <option [value]="usuario.id" *ngFor="let usuario of usuarios">
+          {{ usuario.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="inputGroupSelect01">Encargado</label>
+      <select
+        class="form-select"
+        id="inputGroupSelect02"
+        formControlName="idAccion"
+        name="idAccion"
+      >
+        <option [value]="accion.idAccion" *ngFor="let accion of acciones">
+          {{ accion.nombreAccion }}
+        </option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-text">Descripcion</span>
+      <textarea
+        class="form-control"
+        aria-label="With textarea"
+        formControlName="descripcion"
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-warning mt-5">
+      <i class="fas fa-sync-alt me-2"></i>Actualizar Tarea
+    </button>
+  </form>
+
+  <br />
+  <h2 class="text-center text-white" *ngIf="bitacoras.length === 0">
+    Esta tarea no tiene bitacoras
+  </h2>
+
+  <h2>Bitacora de la tarea </h2>
+  <hr>
+  <table class="table table-dark table-hover" *ngIf="bitacoras.length > 0">
+    <thead>
+      <tr>
+        <th scope="col">Jornadas</th>
+        <th scope="col">Hora Inicio</th>
+        <th scope="col">Hora Fin</th>
+        <th scope="col">Tiempo de Jornada</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bitacora of bitacoras; index as i">
+        <th scope="row">{{i+1}}</th>
+        <td>{{ bitacora.horaInicio | date: "medium" }}</td>
+        <td>{{ bitacora.horaFin | date: "medium" }}</td>
+        <td>{{ bitacora.horasTotales }} minutos</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

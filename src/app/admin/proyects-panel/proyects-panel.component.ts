@@ -26,7 +26,6 @@ export class ProyectsPanelComponent implements OnInit {
   ngOnInit(): void {
     this._proyectService.getProyectos().subscribe(data =>{
       this.proyectos= data;
-      console.log(data);
     });
 
   }
