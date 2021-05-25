@@ -77,7 +77,7 @@
       <tr>
         <!-- <th scope="col">idTarea</th> -->
         <th scope="col">Nombre Tarea</th>
-        <th scope="col">Encargado</th>
+        <!-- <th scope="col">Encargado</th> -->
         <th scope="col">Status</th>
         <th scope="col">Tipo de accción</th>
         <th scope="col">Columna</th>
@@ -91,7 +91,7 @@
       <tr *ngFor="let tarea of tareasProyecto">
         <!-- <th scope="row">{{ tarea.idTarea }}</th> -->
         <td>{{ tarea.nombreTarea }}</td>
-        <td class="text-center">{{ tarea.idUsuarioTarea }}</td>
+        <!-- <td class="text-center">{{ tarea.idUsuarioTarea }}</td> -->
         <td>{{ tarea.status.nombreStatus }}</td>
         <td>{{ tarea.accion.nombreAccion }}</td>
         <td>{{ tarea.columna.nombreColumna }}</td>

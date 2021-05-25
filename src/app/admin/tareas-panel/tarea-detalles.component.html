@@ -17,6 +17,20 @@
     </div>
 
     <div class="input-group mb-3">
+      <label class="input-group-text" for="inputGroupSelect01">proyecto</label>
+      <select
+        class="form-select"
+        id="inputGroupSelect01"
+        formControlName="idAsoc"
+        name="idAsoc"
+      >
+        <option [value]="proyecto.idProyecto" *ngFor="let proyecto of proyectos">
+          {{ proyecto.nombreProyecto }}
+        </option>
+      </select>
+    </div>
+
+    <div class="input-group mb-3">
       <label class="input-group-text" for="inputGroupSelect01">Encargado</label>
       <select
         class="form-select"
@@ -31,7 +45,7 @@
     </div>
 
     <div class="input-group mb-3">
-      <label class="input-group-text" for="inputGroupSelect01">Encargado</label>
+      <label class="input-group-text" for="inputGroupSelect01">Accion</label>
       <select
         class="form-select"
         id="inputGroupSelect02"

@@ -91,7 +91,7 @@ export class BoardComponent implements OnInit {
     Swal.fire({
       title: '¿Esta seguro?',
       text:
-        '¿Esta seguro que quiere iniciar la tarea ' + tarea.nombreTarea + '?',
+        '¿Esta seguro que quiere pausar la tarea ' + tarea.nombreTarea + '?',
       icon: 'question',
       showConfirmButton: true,
       showCancelButton: true,

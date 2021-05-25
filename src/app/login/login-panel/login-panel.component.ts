@@ -6,6 +6,8 @@ import { UsuarioService } from '../../services/usuario.service';
 import { LoginUsuario } from 'src/app/models/login-usuario';
 import { TokenService } from 'src/app/services/token.service';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login-panel',
@@ -63,8 +65,7 @@ export class LoginPanelComponent implements OnInit {
       data => {
         this.isLogged =true;
         this.isLoginFail=false;
-        console.log(data);
-
+        //console.log(data);
         this.tokenService.setToken(data.token);
         this.tokenService.setUsername(data.nombreUsuario);
         this.tokenService.setAuthorities(data.authorities);
@@ -73,11 +74,13 @@ export class LoginPanelComponent implements OnInit {
 
       },
       err =>{
-        //console.log(err);
         this.isLogged = false;
         this.isLoginFail= true;
         this.errMsj = err.error.message;
-        console.log(this.errMsj);
+        Swal.fire({
+          icon: 'error',
+          title: 'Credenciales incorrectas'
+        })
       }
     );
   }

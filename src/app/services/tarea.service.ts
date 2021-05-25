@@ -28,6 +28,10 @@ export class TareaService {
     return this.http.delete(`${this.url}/${id}`);
   }
 
+  editarTarea(id:number,tarea:Tarea){
+    return this.http.put(`${this.url}/${id}`,tarea);
+  }
+
   agregarTarea(tarea:Tarea){
     return this.http.post(this.url,tarea);
   }

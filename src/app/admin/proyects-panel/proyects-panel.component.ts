@@ -27,11 +27,9 @@ export class ProyectsPanelComponent implements OnInit {
     this._proyectService.getProyectos().subscribe(data =>{
       this.proyectos= data;
     });
-
   }
 
   borrarProyecto(id:number){
-    console.log("se borrara el proyecto con el id:"+id);
     Swal.fire({
       title: '¿Esta seguro?',
       text: '¿Esta seguro que quiere borrar el proyecto '+id+"?",

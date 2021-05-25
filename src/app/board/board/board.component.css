@@ -7,10 +7,7 @@
   justify-content: space-around;
 }
 
-.container{
-  width: 500px;
-  margin: 0 25px 25px 0;
-}
+
 
 .card{
   border-style: solid;
@@ -18,7 +15,17 @@
   border: 1px solid #000000;
 }
 
+.m-3{
+  opacity: 0.95;
+}
+
 button{
   border-radius: 6px;
   border: 2px solid #000000;
 }
+
+.container-wrapper>.container{
+  width: 550px;
+  margin: 0 25px 25px 0;
+}
+

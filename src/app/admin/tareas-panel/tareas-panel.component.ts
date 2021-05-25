@@ -76,8 +76,8 @@ export class TareasPanelComponent implements OnInit {
 
 borrar(tarea:Tarea){
   Swal.fire({
-         title: '¿Esta seguro?',
-         text: '¿Esta seguro que quiere borrar la tarea "'+tarea.nombreTarea+'"?',
+         title: '¿Esta seguro que quiere borrar la tarea "'+tarea.nombreTarea+'"?',
+         text: 'Esto sera permanente',
          icon: 'question',
          showConfirmButton: true,
          showCancelButton: true
@@ -108,7 +108,12 @@ cancelar(tarea:Tarea){
 
 agregar(){
   if(this.createTarea.invalid){
-         return
+    Swal.fire({
+      title:'Todos los campos son obligatorios',
+      icon:'error'
+    });
+    return
+
      }
      const tarea:Tarea={
       idAsociado: Number(this._route.snapshot.paramMap.get('id')),

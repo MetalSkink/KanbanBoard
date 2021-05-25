@@ -1,19 +1,20 @@
 <app-navbar></app-navbar>
-<div class="content-wrapper">
+<div class="container-fluid">
   <h2 *ngIf="tareasDeUsuario.length === 0" class="text-center">
     NO TIENES TAREAS ASIGNADAS
   </h2>
   <div *ngIf="tareasDeUsuario.length > 0" class="container-wrapper">
-    <div class="container">
+    <div class="container columna-kanban">
       <h2>Backlog</h2>
+      <hr>
       <div class="card" id="backlog">
         <div class="card-body">
           <!-- Este es el card de ejemplo -->
           <div
             class="card m-3 border-dark"
             *ngFor="let tarea of Backlog"
-            style="max-height: 18rem"
-            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5 }"
+            style="max-height: 25rem"
+            [ngClass]="{ 'text-white bg-info': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5 }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
@@ -72,6 +73,7 @@
 
     <div class="container">
       <h2>To Do</h2>
+      <hr>
       <div class="card border-dark">
         <div class="card-body">
           <!-- Este es el card de ejemplo -->
@@ -79,7 +81,7 @@
             class="card m-3 border-dark"
             *ngFor="let tarea of toDo"
             style="max-height: 18rem"
-            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5  }"
+            [ngClass]="{'text-white bg-info': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5  }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
@@ -131,6 +133,7 @@
 
     <div class="container">
       <h2>Doing</h2>
+      <hr>
       <div class="card">
         <div class="card-body">
           <!-- Este es el card de ejemplo -->
@@ -138,7 +141,7 @@
             class="card m-3 border-dark"
             *ngFor="let tarea of Doing"
             style="max-height: 18rem"
-            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5  }"
+            [ngClass]="{ 'text-white bg-info': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5  }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
@@ -190,6 +193,7 @@
 
     <div class="container">
       <h2>Done</h2>
+      <hr>
       <div class="card">
         <div class="card-body">
           <!-- Este es el card de ejemplo -->
@@ -197,7 +201,7 @@
             class="card m-3 border-dark "
             *ngFor="let tarea of Done"
             style="max-height: 18rem"
-            [ngClass]="{ 'text-white bg-primary': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5  }"
+            [ngClass]="{ 'text-white bg-info': tarea.status.idStatus === 3, 'text-dark bg-warning': tarea.status.idStatus === 2, 'text-white bg-danger': tarea.status.idStatus === 5  }"
           >
             <div class="card-header">
               <strong>{{ tarea.nombreTarea }}</strong>
