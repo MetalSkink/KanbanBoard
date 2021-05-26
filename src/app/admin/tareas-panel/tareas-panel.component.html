@@ -53,7 +53,7 @@
     </div>
 
     <div class="input-group">
-      <span class="input-group-text">Descripción</span><br />
+      <span class="input-group-text">Descripción (Opcional)</span><br />
 
       <textarea
         class="form-control"
@@ -64,10 +64,10 @@
     </div>
 
     <!-- Fin de los inputs -->
-    <div id="emailHelp" class="form-text fw-bolder text-center">
+    <!-- <div id="emailHelp" class="form-text fw-bolder text-center">
       <h2>Todos los campos son obligatorios</h2>
-    </div>
-    <button type="submit" class="btn btn-success">
+    </div> -->
+    <button type="submit" class="btn btn-success mt-4">
       <i class="fas fa-plus me-2"></i>Agregar Tarea
     </button>
   </form>
@@ -77,11 +77,10 @@
       <tr>
         <!-- <th scope="col">idTarea</th> -->
         <th scope="col">Nombre Tarea</th>
-        <!-- <th scope="col">Encargado</th> -->
         <th scope="col">Status</th>
         <th scope="col">Tipo de accción</th>
         <th scope="col">Columna</th>
-        <th scope="col">Descripcion</th>
+        <th scope="col">Jornadas</th>
         <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
@@ -95,14 +94,14 @@
         <td>{{ tarea.status.nombreStatus }}</td>
         <td>{{ tarea.accion.nombreAccion }}</td>
         <td>{{ tarea.columna.nombreColumna }}</td>
-        <td>{{ tarea.descripcion }}</td>
+        <td>{{ tarea.bitacoras.length }}</td>
         <td>
           <button
             type="button"
             class="btn btn-warning"
             [routerLink]="['/tarea-detalles/', tarea.idTarea]"
           >
-            <i class="fas fa-info-circle me-2"></i>Detalles
+            <i class="fas fa-info-circle me-2"></i>Detalles / Editar
           </button>
         </td>
         <td>

@@ -35,9 +35,7 @@ export class BoardComponent implements OnInit {
     this.Done = [];
     this.nombreUsuario = String(sessionStorage.getItem('AuthUsername'));
     this._usuariosService.getUsuario(this.nombreUsuario).subscribe((data) => {
-      //console.log(data);
       this.tareasDeUsuario = data.tareas;
-      //console.log(this.tareasDeUsuario);
       this.tareasDeUsuario.forEach((tarea) => {
         if (tarea.columna.idColumna === 1) {
           this.Backlog.push(tarea);
@@ -50,10 +48,6 @@ export class BoardComponent implements OnInit {
         }
       });
     });
-    // console.log(this.Backlog);
-    // console.log(this.toDo);
-    // console.log(this.Doing);
-    // console.log(this.Done);
   }
 
   empezar(tarea: Tarea) {
@@ -91,7 +85,7 @@ export class BoardComponent implements OnInit {
     Swal.fire({
       title: '¿Esta seguro?',
       text:
-        '¿Esta seguro que quiere pausar la tarea ' + tarea.nombreTarea + '?',
+        '¿Esta seguro que quiere pausar la tarea: "' + tarea.nombreTarea + '"?',
       icon: 'question',
       showConfirmButton: true,
       showCancelButton: true,
@@ -116,13 +110,6 @@ export class BoardComponent implements OnInit {
       }
     });
   }
-
-  // drop (event: CdkDragDrop<Tarea[]>): void{
-  //   console.log("arrastrado test");
-  //   if ( event.previousContainer === event.container){
-  //     return
-  //   }
-  // }
 
   bajarColumna(tarea: Tarea) {
     this._tareasService

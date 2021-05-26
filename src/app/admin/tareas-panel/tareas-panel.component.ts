@@ -34,7 +34,7 @@ export class TareasPanelComponent implements OnInit {
               private _route:ActivatedRoute) {
                 this.createTarea=this.fb.group({
                   nombreTarea:['',Validators.required],
-                  descripcion:['',Validators.required],
+                  descripcion:[''],
                   idAsociado:['',Validators.required],
                   idUsuarioTarea:['',Validators.required],
                   idAccion:['',Validators.required]
@@ -60,9 +60,8 @@ export class TareasPanelComponent implements OnInit {
     this._proyectosService.getProyecto(idNumber).subscribe(data3=>{
       this.proyecto=data3;
       this.tareasProyecto=data3.tareas;
-      // console.log(data3);
-      // console.log(this.proyecto);
-      // console.log(this.tareasProyecto);
+      console.log(this.tareasProyecto);
+
       this.createTarea.setValue({
         idAsociado: this.proyecto.idProyecto,
         nombreTarea:null,
@@ -85,6 +84,10 @@ borrar(tarea:Tarea){
          if (resp.value){
            this._tareasService.deleteTarea(tarea.idTarea).subscribe(()=>{
             this.getTareasDeProyecto();
+            Swal.fire({
+              title:'Tarea Borrada con exito',
+              icon: 'success'
+            });
            });
          }
        });
@@ -101,6 +104,10 @@ cancelar(tarea:Tarea){
          if (resp.value){
             this._tareasService.statusCancelar(tarea.idTarea, tarea).subscribe(()=>{
               this.getTareasDeProyecto();
+              Swal.fire({
+                title:'Tarea Cancelada con exito',
+                icon: 'success'
+              });
             });
          }
        });
@@ -132,6 +139,10 @@ agregar(){
       }
       this._tareasService.agregarTarea(tarea).subscribe(()=>{
         this.getTareasDeProyecto();
+        Swal.fire({
+          title:'Tarea agregada con exito',
+          icon: 'success'
+        });
       });
 
 

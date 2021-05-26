@@ -27,13 +27,8 @@ export class ProdGuardGuard implements CanActivate {
       });
       if (!this.tokenService.getToken() || expectedRol.indexOf(this.realRol) === -1){
         this.router.navigate(['/']);
-        // console.log(this.realRol);
-        // console.log("nel");
-
         return false;
       }
-      // console.log(this.realRol);
-      // console.log("pasale");
       return true;
   }
 

@@ -30,7 +30,7 @@ export class UsersPanelComponent implements OnInit {
                   nombre:['',Validators.required],
                   nombreUsuario:['',Validators.required],
                   email:['',[Validators.required,Validators.email]],
-                  password:['',[Validators.required,Validators.minLength(6)]],
+                  password:['',[Validators.required]],
                 })
               }
 
@@ -63,6 +63,10 @@ export class UsersPanelComponent implements OnInit {
 
   agregarUsuario(){
     if(this.createUsuario.invalid){
+      Swal.fire({
+        title:'Todos los campos son obligatorios',
+        icon:'error'
+      });
       return
     }
     const nuevoUsuario: NuevoUsuario={
@@ -71,23 +75,14 @@ export class UsersPanelComponent implements OnInit {
       password :this.createUsuario.value.password,
       email: this.createUsuario.value.email,
     }
-    console.log(nuevoUsuario);
 
-    // if (form.invalid){
-    //   console.log("formulario no valido");
-    //   return;
-    // }
-    // console.log(form);
-    // console.log(this.usuario);
-    // this._userService.agregarProyecto(this.usuario).subscribe(()=>{
-    //   this._userService.getUsuarios().subscribe(data=>{
-    //     this.usuarios= data;
-    //     })
-    // });
-    //this.nuevoUsuario = new NuevoUsuario(this.nombre, this.nombreUsuario,this.email,this.password);
     this.authService.nuevo(nuevoUsuario).subscribe(()=>{
       this._userService.getUsuarios().subscribe(data =>{
         this.usuarios= data;
+        Swal.fire({
+          title:'Usuario creado exitosamente',
+          icon: 'success'
+        });
       });
     })
   }

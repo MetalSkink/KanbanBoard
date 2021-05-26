@@ -34,14 +34,6 @@ export class LoginPanelComponent implements OnInit {
     private router:Router,
     private tokenService:TokenService,
     private authService:AuthService) {
-
-    //CODIGO QUE NO SE SI BORRAR
-    // this.idUsuario=Number(localStorage.getItem('nControl'));
-    // this._usuariosServive.getUsuario(this.idUsuario).subscribe(data=>{
-    //   console.log(data);
-
-    // })
-
   }
 
   ngOnInit(): void {
@@ -53,10 +45,6 @@ export class LoginPanelComponent implements OnInit {
     if(this.isLogged= true){
       this.router.navigate(["/board"])
     }
-    //PARA QUE NO REGRESE AL LOGIN SI YA ESTA LOGEADO
-    //if ( this.isLogged= true) {
-      //this.router.navigate(["/board"])
-    //}
   }
 
   onLogin(){
@@ -65,7 +53,6 @@ export class LoginPanelComponent implements OnInit {
       data => {
         this.isLogged =true;
         this.isLoginFail=false;
-        //console.log(data);
         this.tokenService.setToken(data.token);
         this.tokenService.setUsername(data.nombreUsuario);
         this.tokenService.setAuthorities(data.authorities);

@@ -77,9 +77,12 @@
     Esta tarea no tiene bitacoras
   </h2>
 
-  <h2>Bitacora de la tarea </h2>
-  <hr>
-  <table class="table table-dark table-hover" *ngIf="bitacoras.length > 0">
+  <div *ngIf="bitacoras.length > 0">
+    <h2>Bitacora de la tarea </h2>
+    <hr>
+  </div>
+
+  <table class="table table-light table-hover mb-5" *ngIf="bitacoras.length > 0">
     <thead>
       <tr>
         <th scope="col">Jornadas</th>

@@ -25,4 +25,8 @@ export class ProyectService {
   agregarProyecto(proyecto:Proyecto){
     return this.http.post(this.url,proyecto);
   }
+
+  editarProyecto(id: number, proyecto:Proyecto){
+    return this.http.put(`${this.url}/${id}`,proyecto);
+  }
 }

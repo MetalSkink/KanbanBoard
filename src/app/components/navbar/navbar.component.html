@@ -16,7 +16,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a
-          *ngIf="isLogged"
+          *ngIf="isLogged && isAdmin"
             class="nav-link"
             routerLink="/board"
             routerLinkActive="active"
@@ -25,7 +25,7 @@
         </li>
         <li class="nav-item">
           <a
-          *ngIf="isLogged"
+          *ngIf="isLogged && isAdmin"
             class="nav-link"
             routerLink="/usuarios"
             routerLinkActive="active"

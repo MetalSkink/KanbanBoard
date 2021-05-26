@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginPanelComponent },
   { path: 'board', component: BoardComponent, canActivate: [guard],data: {expectedRol: ['admin','user']}},
   { path: 'proyectos', component: ProyectsPanelComponent, canActivate: [guard],data: {expectedRol: ['admin']}},
+  { path: 'edit-proyecto/:id', component: ProyectsPanelComponent, canActivate: [guard],data: {expectedRol: ['admin']}},
   { path: 'tareas/:id', component: TareasPanelComponent, canActivate: [guard],data: {expectedRol: ['admin']}},
   { path: 'tarea-detalles/:id', component: TareaDetallesComponent, canActivate: [guard],data: {expectedRol: ['admin']}},
   { path: 'usuarios', component: UsersPanelComponent, canActivate: [guard],data: {expectedRol: ['admin']}},

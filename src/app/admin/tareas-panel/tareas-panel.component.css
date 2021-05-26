@@ -3,3 +3,8 @@
   font-weight: bold;
   font-size: 20px;
 }
+
+button{
+  border-radius: 6px;
+  border: 2px solid #000000;
+}
